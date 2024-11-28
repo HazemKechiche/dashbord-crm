@@ -7,11 +7,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Add Affaire</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('affaires.store') }}" method="POST">
+            <form action="{{ route('affaires.store',$clients->id) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="GestionnaireAffaire">Gestionnaire de l'Affaire:</label>
-                    <input type="text" name="GestionnaireAffaire" id="GestionnaireAffaire" class="form-control" required>
+                    <input type="text" name="GestionnaireAffaire" value ="{{ Auth::user()->name }}"id="GestionnaireAffaire" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="NomAffaire">Nom de l'Affaire:</label>
@@ -21,9 +21,9 @@
                     <label for="NomClient">Nom du Client:</label>
                     <select name="NomClient" id="NomClient" class="form-control" required>
                         <option value="">Sélectionner un client</option>
-                        @foreach ($clients as $client)
-                            <option value="{{ $client->Nom }}">{{ $client->Nom }}</option>
-                        @endforeach
+                        
+                            <option value="{{ $clients->Nom }}">{{ $clients->Nom }}</option>
+                 
                     </select>
                 </div>
                 <div class="form-group">

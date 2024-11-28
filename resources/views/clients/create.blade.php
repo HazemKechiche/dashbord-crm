@@ -14,7 +14,7 @@
 
             <div class="form-group">
                 <label for="gestionnaire">Gestionnaire du Contact:</label>
-                <input type="text" name="gestionnaire" id="gestionnaire" class="form-control" required>
+                <input type="text" name="gestionnaire" value="{{ Auth::user()->name }}" id="gestionnaire" class="form-control" required>
             </div>
 
             <div class="form-group">

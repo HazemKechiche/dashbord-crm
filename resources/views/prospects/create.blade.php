@@ -11,7 +11,7 @@
             <!-- Include the necessary form fields for creating a new Prospect -->
             <div class="form-group">
                 <label for="GestionnaireDuProspect">Gestionnaire du Prospect:</label>
-                <input type="text" name="GestionnaireDuProspect" id="GestionnaireDuProspect" class="form-control" required>
+                <input type="text" name="GestionnaireDuProspect" value="{{ Auth::user()->name }}" id="GestionnaireDuProspect" class="form-control" required>
             </div>
 
             <div class="form-group">

@@ -5,6 +5,8 @@
     <div class="row">
         <div class="col-md-6">
             <div id="map" style="width: 100%; height: 500px;"></div>
+
+            <!-- Propositions Section -->
             <div class="card mt-4">
                 <div class="card shadow">
                     <div class="card-header bg-secondary text-white">
@@ -36,44 +38,54 @@
                             @endforeach
                         </div>
                         <div class="card-footer">
-        <a href="{{ route('proposals.create', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
-    </div>
-                       
+                            <a href="{{ route('proposals.create', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-    <div class="row">
-        @foreach ($affaires as $affaire)
-            <div class="col-lg-4 col-md-6">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3 d-flex justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">{{ $affaire->NomAffaire }}</h6>
-                        <form action="{{ route('affaires.destroy', $affaire->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
-                        </form>
+
+           <!-- Affaires Section -->
+<div class="mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Affaires</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach ($affaires as $affaire)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header py-3 d-flex justify-content-between bg-primary text-white">
+                                <h6 class="m-0 font-weight-bold">{{ $affaire->NomAffaire }}</h6>
+                                <form action="{{ route('affaires.destroy', $affaire->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <p>Gestionnaire de l'Affaire: {{ $affaire->GestionnaireAffaire }}</p>
+                                <p>Nom du Client: {{ $affaire->NomClient }}</p>
+                                <p>Type: {{ $affaire->Type }}</p>
+                                <p>Origine du Prospect: {{ $affaire->OrigineProspect }}</p>
+                                <p>Montant: {{ $affaire->Montant }} €</p>
+                                <p>Date d'échéance: {{ $affaire->DateEcheance }}</p>
+                                <p>Étape: {{ $affaire->Etape }}</p>
+                                <p>Chiffre d'affaires: € {{ number_format($affaire->ChiffreAffaires, 2, ',', ' ') }}</p>
+                                <p>Description Attendue: {{ $affaire->DescriptionAttendue }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p>Gestionnaire de l'Affaire: {{ $affaire->GestionnaireAffaire }}</p>
-                        <p>Nom du Client: {{ $affaire->NomClient }}</p>
-                        <p>Type: {{ $affaire->Type }}</p>
-                        <p>Origine du Prospect: {{ $affaire->OrigineProspect }}</p>
-                        <p>Montant: {{ $affaire->Montant }} €</p>
-                        <p>Date d'échéance: {{ $affaire->DateEcheance }}</p>
-                        <p>Étape: {{ $affaire->Etape }}</p>
-                        <p>Chiffre d'affaires: € {{ number_format($affaire->ChiffreAffaires, 2, ',', ' ') }}</p>
-                        <p>Description Attendue: {{ $affaire->DescriptionAttendue }}</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
-        @endforeach
+        </div>
     </div>
 </div>
 
         </div>
+
         <div class="col-md-6">
+            <!-- Client Details Card -->
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h2 class="mb-0">{{ $client->Nom }} {{ $client->Prenom }}</h2>
@@ -86,8 +98,8 @@
                     </ul>
                 </div>
             </div>
-           
 
+            <!-- Activities Section -->
             <div class="mt-4">
                 <div class="card shadow">
                     <div class="card-header bg-secondary text-white">
@@ -122,44 +134,42 @@
                         @endforeach
                     </div>
                     <div class="card-footer">
-        <a href="{{ route('activities.createForClient', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
-    </div>
+                        <a href="{{ route('activities.createForClient', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- Scripts Section -->
             <div class="mt-4">
-    <div class="card shadow">
-        <div class="card-header bg-secondary text-white">
-            <h5 class="mb-0">Scripts</h5>
-        </div>
-        <div class="card-body">
-            @foreach($coms as $t)
-                <div class="card mb-3">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Scripts</h5>
+                    </div>
                     <div class="card-body">
-                        <p>Subject: {{ $t->subject }}</p>
-                        <p>Content: {{ $t->content }}</p>
+                        @foreach($coms as $t)
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p>Subject: {{ $t->subject }}</p>
+                                    <p>Content: {{ $t->content }}</p>
+                                </div>
+                                <div class="card-footer text-muted text-right">
+                                    <form action="{{ route('communication_templates.destroy', $t->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="card-footer text-muted text-right">
-                        <form action="{{ route('communication_templates.destroy', $t->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                        </form>
+                    <div class="card-footer">
+                        <a href="{{ route('communication_templates.create', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
                     </div>
                 </div>
-            @endforeach
-        </div>
-        <div class="card-footer">
-        <a href="{{ route('communication_templates.create', ['client_id' => $client->id]) }}" class="btn btn-primary">Add New</a>
-    </div>
-        </div>
-    </div>
-</div>
-
-
-            
-            <div class="mt-4">
-                <!-- Empty space for better layout balance -->
             </div>
+            
+            <!-- Empty space for better layout balance -->
+            <div class="mt-4"></div>
         </div>
     </div>
 </div>

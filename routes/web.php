@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployerController;
@@ -11,7 +11,8 @@ use App\Http\Controllers\AffaireController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ProsposalController;
 use App\Http\Controllers\CommunicationTemplateController;
-
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,15 @@ use App\Http\Controllers\CommunicationTemplateController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 
 Route::get('home',[home::class,'home']);
 Route::get('users',[HomeController::class,'users']);
@@ -71,8 +79,8 @@ Route::post('/prospects', [ProspectController::class, 'store'])->name('prospects
 Route::get('/prospects/{prospect}/edit', [ProspectController::class, 'edit'])->name('prospects.edit');
 Route::delete('/prospect/{prospect}', [ProspectController::class, 'destroy'])->name('prospects.destroy');
 Route::put('/prospects/{prospect}', [ProspectController::class, 'update'])->name('prospects.update');
-Route::get('/affaires/create', [AffaireController::class, 'create'])->name('affaires.create');
-Route::post('/affaires', [AffaireController::class, 'store'])->name('affaires.store');
+Route::get('/affaires/create/{id}', [AffaireController::class, 'create'])->name('affaires.create');
+Route::post('/affaires/{id}', [AffaireController::class, 'store'])->name('affaires.store');
 Route::get('/affaires', [AffaireController::class, 'index'])->name('affaires.affaires');
 Route::delete('/affaires/{id}', [AffaireController::class,'destroy'])->name('affaires.destroy');
 Route::get('/activities/create/{client_id}', [ActivityController::class, 'create'])->name('activities.createForClient');
@@ -87,10 +95,19 @@ Route::post('/activities/{id}', [ActivityController::class, 'store'])
 Route::get('/communication_templates', [CommunicationTemplateController::class, 'index'])->name('communication_templates.index');
 Route::get('/communication_templates/create/{client_id}', [CommunicationTemplateController::class, 'create'])->name('communication_templates.create');
 Route::post('/communication_templates/{client_id}', [CommunicationTemplateController::class, 'store'])->name('communication_templates.store');
-Route::delete('/delete/{id}', [CommunicationTemplateController::class, 'destroy'])->name('communication_templates.destroy');
+Route::delete('/com/{id}', [CommunicationTemplate::class, 'destroy'])->name('communication_templates.destroy');
 
 
 Route::get('/proposals/create/{client_id}', [ProsposalController::class, 'create'])->name('proposals.create');
 Route::post('/proposals/{client_id}', [ProsposalController::class, 'store'])->name('proposals.store');
 Route::get('/{client_id}/proposals', [ProsposalController::class, 'index'])->name('proposals.index');
 Route::delete('{client_id}/prosposal/{proposal_id}', [ProsposalController::class, 'destroy'])->name('proposals.destroy');
+Route::get('/Oclients', [ClientController::class, 'show'])->name('clients.show');
+
+
+Route::get('/clients/search', [ClientController::class, 'search'])->name('clients.search');
+Route::get('/dashboard', [DashboardController::class,'stat'])->name('client.activities.stats')->middleware(['auth', 'verified'])->name('dashboard');
+
+
+});
+require __DIR__.'/auth.php';

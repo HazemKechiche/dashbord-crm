@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Add Communication Template') }}</div>
 
                 <div class="card-body">
-                <form method="post" action="{{ route('communication_templates.store', ['client_id' => $client->id]) }}">
+                <form method="post" action="{{ route('communication_template.store', ['client_id' => $client->id]) }}">
                         @csrf
 
                         
@@ -57,7 +57,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Add Template') }}
                                 </button>
-                                <a href="{{ route('communication_templates.index') }}" class="btn btn-secondary">
+                                <a href="{{ route('communication_template.index') }}" class="btn btn-secondary">
                                     {{ __('Cancel') }}
                                 </a>
                             </div>

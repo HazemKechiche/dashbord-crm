@@ -11,7 +11,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="Gestionnairedetache">Gestionnaire de tache:</label>
-                    <input type="text" name="Gestionnairedetache" id="Gestionnairedetache" class="form-control" required>
+                    <input type="text" name="Gestionnairedetache" value="{{ Auth::user()->name }}"id="Gestionnairedetache" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="DatedEcheance">Date d'échéance:</label>

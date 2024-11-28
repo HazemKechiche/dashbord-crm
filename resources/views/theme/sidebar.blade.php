@@ -3,9 +3,8 @@
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-    <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-    </div>
+<div class="sidebar-brand-icon rotate-n-15">
+  </div>
     <div class="sidebar-brand-text mx-3">NETCOM <sup></sup></div>
 </a>
 
@@ -14,7 +13,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="/">
+    <a class="nav-link" href="/dashboard">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
@@ -35,7 +34,7 @@
 <li class="nav-item">
     <a class="nav-link" href="/employe">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Employee</span></a>
+        <span>Agents</span></a>
 </li>
 
 <!-- Nav Item - Utilities Collapse Menu -->
@@ -49,10 +48,9 @@
         data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <a class="collapse-item" href="/prospects">Liste</a>
+            <a class="collapse-item" href="/prospects/create">Ajouter</a>
+            
         </div>
     </div>
 </li>
@@ -95,9 +93,9 @@
 
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="/Oclients">
         <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
+        <span>Clients</span></a>
 </li>
 
 <!-- Divider -->

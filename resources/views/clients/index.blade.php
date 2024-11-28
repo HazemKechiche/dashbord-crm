@@ -1,7 +1,13 @@
 @extends('theme.default')
 @section('content')
 <div class="container-fluid">
-<h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('clients.create', ['id' => $id]) }}" >Ajouter un nouveau client</a></h6>
+<div class="container-fluid">
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('clients.create', ['id' => $id]) }}" class="btn btn-primary">Ajouter un nouveau client</a>
+    </div>
+    <!-- Your other content goes here -->
+</div>
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         
