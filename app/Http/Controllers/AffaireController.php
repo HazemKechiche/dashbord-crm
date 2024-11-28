@@ -23,9 +23,9 @@ class AffaireController extends Controller
     /**
      * Show the form for creating a new affaire.
      */
-    public function create()
+    public function create($id)
     {
-        $clients = Client::all(); // Fetch the list of all clients
+        $clients = Client::find($id); // Fetch the list of all clients
         return view('affaires.create', compact( 'clients'));
 
     }
@@ -33,7 +33,7 @@ class AffaireController extends Controller
     /**
      * Store a newly created affaire in the database.
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         $validatedData = $request->validate([
             'GestionnaireAffaire' => 'required',
@@ -47,6 +47,7 @@ class AffaireController extends Controller
             'ChiffreAffaires' => 'required|numeric',
             'DescriptionAttendue' => 'nullable',
         ]);
+        $validatedData['client_id'] = $id;
 
         Affaire::create($validatedData);
 

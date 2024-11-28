@@ -8,8 +8,8 @@ class Affaire extends Model
 {
     use HasFactory;
 
-    protected $table = 'affaire'; // Replace 'affaires' with your database table name if different
-    protected $primaryKey = 'id'; // If the primary key column is named differently, replace 'id' with the correct column name
+   
+   
 
     protected $fillable = [
         'GestionnaireAffaire',
@@ -22,6 +22,7 @@ class Affaire extends Model
         'Etape',
         'ChiffreAffaires',
         'DescriptionAttendue',
+        'client_id'
         // Add other attributes as needed
     ];
 

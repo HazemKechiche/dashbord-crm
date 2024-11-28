@@ -14,7 +14,7 @@ class CommunicationTemplateController extends Controller
     {
         $communicationTemplates = CommunicationTemplate::all();
         $clients = Client::all();
-        return view('communication_templates.index', compact('communicationTemplates','clients'));
+        return view('communication_template.index', compact('communicationTemplates','clients'));
     }
 
     public function create($client_id) 
@@ -22,7 +22,7 @@ class CommunicationTemplateController extends Controller
         $client = Client::find($client_id);
 
         
-        return view('communication_templates.create', compact('client'));
+        return view('communication_template.create', compact('client'));
     }
 
     public function store(Request $request ,$client_id)
@@ -38,14 +38,14 @@ class CommunicationTemplateController extends Controller
 
         CommunicationTemplate::create($validatedData);
 
-        return redirect()->route('communication_templates.index')
+        return redirect()->route('communication_template.index')
             ->with('success', 'Communication template created successfully.');
     }
 
     public function edit(CommunicationTemplate $communicationTemplate)
     {
         $clients = Client::all();
-        return view('communication_templates.edit', compact('communicationTemplate', 'clients'));
+        return view('communication_template.edit', compact('communicationTemplate', 'clients'));
     }
 
     public function update(Request $request, CommunicationTemplate $communicationTemplate)
@@ -59,7 +59,7 @@ class CommunicationTemplateController extends Controller
 
         $communicationTemplate->update($request->all());
 
-        return redirect()->route('communication_templates.index')
+        return redirect()->route('communication_template.index')
             ->with('success', 'Communication template updated successfully.');
     }
 
@@ -67,7 +67,7 @@ class CommunicationTemplateController extends Controller
     {$communicationTemplate = CommunicationTemplate::find($id);
         $communicationTemplate->delete();
 
-        return redirect()->route('communication_templates.index')
+        return redirect()->route('communication_template.index')
             ->with('success', 'Communication template deleted successfully.');
     }
 }

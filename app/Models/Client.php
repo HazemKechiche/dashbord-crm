@@ -26,4 +26,8 @@ class Client extends Model
     {
         return $this->belongsTo(Secteur::class, 'idSecteur');
     }
+    public function activities()
+    {
+        return $this->hasMany(Activity::class, 'client_id');
+    }
 }
